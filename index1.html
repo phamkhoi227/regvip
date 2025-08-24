@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Cấu Hình Reg Vip</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #121212;
+      margin: 0;
+      padding: 20px;
+      color: #e0e0e0;
+      font-weight: bold; /* chữ đậm toàn bộ */
+    }
+    .menu {
+      max-width: 420px;
+      margin: auto;
+      background: #1e1e1e;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.6);
+      padding: 20px;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #333;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    .switch input { display: none; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0;
+      right: 0; bottom: 0;
+      background-color: #555;
+      border-radius: 24px;
+      transition: .3s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .3s;
+    }
+    input:checked + .slider {
+      background-color: #4caf50;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .sensitivity {
+      padding: 15px 0;
+      text-align: left;
+    }
+    input[type=range] {
+      width: 100%;
+    }
+    .save-btn {
+      margin-top: 20px;
+      padding: 10px 18px;
+      background: #4caf50;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .save-btn:disabled {
+      background: #333;
+      cursor: not-allowed;
+    }
+    .status {
+      margin-top: 20px;
+      font-size: 18px;
+      display: none;
+    }
+    .checkmark {
+      font-size: 64px;
+      color: #4caf50;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu">
+    <h2>Cấu Hình Reg Vip</h2>
+    <div class="toggle">
+      <span>Aim Cổ</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle">
+      <span>Nhẹ Tâm</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="toggle">
+      <span>Chống Rung Tâm</span>
+      <label class="switch">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="sensitivity">
+      <label>Độ nhạy: <span id="value">50</span></label><br>
+      <input type="range" min="0" max="100" value="50" id="slider">
+    </div>
+    <button class="save-btn" onclick="saveConfig(this)">Lưu Cài Đặt</button>
+    <div class="status" id="status">Đang lưu...</div>
+    <div class="checkmark" id="check">✔</div>
+  </div>
+
+  <script>
+    const slider = document.getElementById("slider");
+    const value = document.getElementById("value");
+    slider.oninput = function() {
+      value.textContent = this.value;
+    }
+
+    function saveConfig(btn) {
+      btn.disabled = true;
+      document.getElementById("status").style.display = "block";
+      document.getElementById("status").textContent = "Đang lưu...";
+      document.getElementById("check").style.display = "none";
+
+      setTimeout(() => {
+        document.getElementById("status").textContent = "Đã lưu cài đặt";
+        document.getElementById("check").style.display = "block";
+        btn.disabled = false;
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
